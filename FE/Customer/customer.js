@@ -22,6 +22,7 @@ function sendOrder() {
     socket.send(input.value);
     addMessage(input.value, "sent"); // show own message
     input.value = "";
+    console.log(input.value)
   }
 }
       function addMessage(msg, type) {
@@ -33,4 +34,5 @@ function sendOrder() {
         // Auto-scroll
         const messages = document.getElementById("messages");
         messages.scrollTop = messages.scrollHeight;
+        console.log(messages)
       }
