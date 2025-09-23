@@ -2,7 +2,7 @@ const socket = new WebSocket("ws://localhost:3000");
 
       socket.onopen = () => {
         socket.send("chef"); // identify as chef
-        addMessage("✅ Connected as Chef!", "received");
+        addMessage(" Connected as Chef!", "received");
       };
 
 socket.onmessage = (event) => {
