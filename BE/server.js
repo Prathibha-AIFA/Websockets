@@ -4,7 +4,7 @@ const WebSocket = require("ws");
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({server});
 
 let customer = null;
 let chef = null;
@@ -13,7 +13,7 @@ wss.on("connection", (ws) => {
   console.log("A client connected...");
 
 
-    ws.once("message", (msg) => {  //socket.send("msg")
+    ws.once("message", (msg) => {  //socketRef.current.send("msg")
             const role = msg.toString();
 
             if (role === "customer") {
