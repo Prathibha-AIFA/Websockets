@@ -1,14 +1,15 @@
 import React from "react";
 import { Box, Button, Heading, VStack, HStack, Divider } from "@chakra-ui/react";
+import { notifyUser } from "../services/api";
 
 export default function LandingPage() {
-  const handleClick = (role, userId) => {
-    fetch(`http://localhost:3000/notify/${role}/${userId}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: `Hello ${role} ${userId}!` }),
-    });
-    console.log(`Notification sent to ${role} ${userId}`);
+  const handleClick = async (role, userId) => {
+    try {
+      await notifyUser(role, userId, `Hello ${role} ${userId}!`);
+      console.log(`Notification sent to ${role} ${userId}`);
+    } catch (error) {
+      console.error("Error sending notification:", error);
+    }
   };
 
   const clients = [1, 2, 3];
@@ -26,11 +27,7 @@ export default function LandingPage() {
           <Heading size="md" mb={2}>Clients</Heading>
           <HStack spacing={3}>
             {clients.map((id) => (
-              <Button
-                key={`client-${id}`}
-                colorScheme="blue"
-                onClick={() => handleClick("client", id)}
-              >
+              <Button key={`client-${id}`} colorScheme="blue" onClick={() => handleClick("client", id)}>
                 Notify Client {id}
               </Button>
             ))}
@@ -44,11 +41,7 @@ export default function LandingPage() {
           <Heading size="md" mb={2}>HRs</Heading>
           <HStack spacing={3}>
             {hrs.map((id) => (
-              <Button
-                key={`hr-${id}`}
-                colorScheme="green"
-                onClick={() => handleClick("hr", id)}
-              >
+              <Button key={`hr-${id}`} colorScheme="green" onClick={() => handleClick("hr", id)}>
                 Notify HR {id}
               </Button>
             ))}
@@ -62,11 +55,7 @@ export default function LandingPage() {
           <Heading size="md" mb={2}>Managers</Heading>
           <HStack spacing={3}>
             {managers.map((id) => (
-              <Button
-                key={`manager-${id}`}
-                colorScheme="orange"
-                onClick={() => handleClick("manager", id)}
-              >
+              <Button key={`manager-${id}`} colorScheme="orange" onClick={() => handleClick("manager", id)}>
                 Notify Manager {id}
               </Button>
             ))}
@@ -80,11 +69,7 @@ export default function LandingPage() {
           <Heading size="md" mb={2}>Admins</Heading>
           <HStack spacing={3}>
             {admins.map((id) => (
-              <Button
-                key={`admin-${id}`}
-                colorScheme="red"
-                onClick={() => handleClick("admin", id)}
-              >
+              <Button key={`admin-${id}`} colorScheme="red" onClick={() => handleClick("admin", id)}>
                 Notify Admin {id}
               </Button>
             ))}
