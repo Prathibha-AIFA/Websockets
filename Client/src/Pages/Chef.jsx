@@ -40,14 +40,14 @@ const Chef = () => {
     <div className="chat-container">
       <div className="chat-header">Chef</div>
       <div className="chat-messages">
-        {messages.map((m, i) => (
+        {messages.map((message, i) => (
           <div
             key={i}
             className={`message ${
-              m.from === "chef" ? "sent" : "received"
+              message.from === "chef" ? "sent" : "received"
             }`}
           >
-            {m.text}
+            {message.text}
           </div>
         ))}
       </div>
